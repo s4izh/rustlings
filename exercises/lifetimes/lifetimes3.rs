@@ -5,17 +5,21 @@
 // Execute `rustlings hint lifetimes3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
-struct Book {
-    author: &str,
-    title: &str,
+struct Book<'a> {
+    author: &'a mut str,
+    title: &'a mut str,
 }
 
 fn main() {
-    let name = String::from("Jill Smith");
-    let title = String::from("Fish Flying");
-    let book = Book { author: &name, title: &title };
+    let mut name = String::from("Jill Smith");
+    let mut title = String::from("Fish Flying");
+    let mut book = Book {
+        author: &mut name,
+        title: &mut title,
+    };
+
+    let mut binding = String::from("Sergio");
+    book.author = &mut binding;
 
     println!("{} by {}", book.title, book.author);
 }
